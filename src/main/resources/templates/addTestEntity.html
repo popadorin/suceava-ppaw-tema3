@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tema 3</title>
+</head>
+<body>
+    <form th:action="@{/test/add}" th:object="${testEntity}" method="post">
+        <span>name = </span><input type="text" th:field="*{name}"/><br>
+        <input type="submit" value="Add entity">
+    </form>
+
+    <!--<p>CREATEd TestEntity:</p>-->
+    <!--<p th:text="${te}"></p>-->
+</body>
+</html>

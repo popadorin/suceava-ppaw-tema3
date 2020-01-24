@@ -89,9 +89,7 @@ public class MarkController {
     @PostMapping("showMarksPerSubject")
     public String selectSubject(Subject subject, Model model) {
         List<Mark> marks = this.markService.getMarks();
-        List<Mark> selectedMarks = marks.stream()
-                .filter(m -> m.getSubject().equals(subject))
-                .collect(Collectors.toList());
+        Map<Student, Integer> selectedMarks = MarkHelper.getStudentMarks(marks, subject);
 
         model.addAttribute("marks", selectedMarks);
         List<Subject> subjects = this.subjectService.findAll();
@@ -111,10 +109,7 @@ public class MarkController {
     @PostMapping("showMarksPerStudent")
     public String selectStudent(Student student, Model model) {
         List<Mark> marks = this.markService.getMarks();
-        List<Mark> selectedMarks = marks.stream()
-                .filter(m -> m.getStudent().equals(student))
-                .collect(Collectors.toList());
-
+        Map<Subject, Integer> selectedMarks = MarkHelper.getSubjectMarks(marks, student);
         model.addAttribute("marks", selectedMarks);
         List<Student> students = this.studentService.findAll();
         model.addAttribute("students", students);

@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class MarkHelper {
     public static List<String> getTableHeaders(List<Subject> subjects) {
@@ -49,5 +50,45 @@ public class MarkHelper {
         });
 
         return orderedMarks;
+    }
+
+    public static Map<Student, Integer> getStudentMarks(List<Mark> marks, Subject subject) {
+        Map<Student, Integer> studentMarks = new HashMap<>();
+        List<Mark> selectedMarks = marks.stream()
+                .filter(m -> m.getSubject().equals(subject))
+                .collect(Collectors.toList());
+
+        selectedMarks.forEach(sm -> {
+            Student s = sm.getStudent();
+            if (studentMarks.containsKey(s)) {
+                Integer value = studentMarks.get(s);
+                Integer average = (value + sm.getValue()) / 2;
+                studentMarks.put(s, average);
+            } else {
+                studentMarks.put(sm.getStudent(), sm.getValue());
+            }
+        });
+
+        return studentMarks;
+    }
+
+    public static Map<Subject, Integer> getSubjectMarks(List<Mark> marks, Student student) {
+        Map<Subject, Integer> studentMarks = new HashMap<>();
+        List<Mark> selectedMarks = marks.stream()
+                .filter(m -> m.getStudent().equals(student))
+                .collect(Collectors.toList());
+
+        selectedMarks.forEach(sm -> {
+            Subject s = sm.getSubject();
+            if (studentMarks.containsKey(s)) {
+                Integer value = studentMarks.get(s);
+                Integer average = (value + sm.getValue()) / 2;
+                studentMarks.put(s, average);
+            } else {
+                studentMarks.put(sm.getSubject(), sm.getValue());
+            }
+        });
+
+        return studentMarks;
     }
 }

@@ -37,9 +37,9 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="mark : ${marks}">
-            <td th:text="${mark.student.getFullName()}"/>
-            <td th:text="${mark.value}"/>
+        <tr th:each="markKey : ${marks.keySet()}">
+            <td th:text="${markKey.getFullName()}"/>
+            <td th:text="${marks.get(markKey)}"/>
         </tr>
         </tbody>
     </table>

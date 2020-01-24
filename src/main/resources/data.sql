@@ -52,5 +52,7 @@ VALUES ('OOP'),
 INSERT INTO mark (student_id, subject_id, value)
 VALUES (1, 1, 8),
        (1, 2, 7),
-       (2, 3, 4)
+       (2, 3, 4),
+       (4, 1, 10),
+       (4, 3, 8)
 ;

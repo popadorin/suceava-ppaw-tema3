@@ -1,0 +1,45 @@
+<html style="position: relative; min-height: 100%;">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+<th:block th:include="fragments/menu :: menu"></th:block>
+<div class="w3-container">
+    <h2>Show marks per student</h2>
+
+    <form method="post" th:action="@{/showMarksPerStudent}">
+        <label>Please select student:</label>
+        <select class="form-control" name="s">
+            <option th:each="student : ${students}" th:value="${student.id}"
+                    th:text="${student.getFullName()}">
+            </option>
+        </select>
+
+        <input type="submit" class="btn btn-outline-primary col-lg-12" value="Show marks"/>
+    </form>
+
+    <table th:if="${marks != null}" style="width: auto; border=2;"
+           class="table table-striped table-condensed">
+
+        <thead>
+        <tr class="table-primary">
+            Marks gained by <span th:text="marks.get(0).getStudent().getFullName()"></span>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="mark : ${marks}">
+            <td th:text="${mark.subject.getName()}"/>
+            <td th:text="${mark.value}"/>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<th:block th:include="fragments/footer :: footer"></th:block>
+</body>
+</html>

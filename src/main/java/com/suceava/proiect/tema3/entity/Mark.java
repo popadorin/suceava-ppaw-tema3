@@ -35,6 +35,10 @@ public class Mark {
     public Mark() {
     }
 
+    public Mark(Subject subject) {
+        this.subject = subject;
+    }
+
     public Integer getValue() {
         return value;
     }

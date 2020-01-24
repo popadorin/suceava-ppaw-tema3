@@ -1,0 +1,46 @@
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+<th:block th:include="fragments/menu :: menu"></th:block>
+<div class="w3-container" style="width: 550px;">
+    <h2>Enter marks</h2>
+    <form method="post" th:object="${mark}" th:action="@{/enterMarks}">
+        <label>Value: </label>
+        <input class="form-control" th:field="*{{value}}"/>
+
+        <label th:for="Subject">Subject:</label>
+        <select class="form-control" th:field="*{subject}">
+            <option th:each="subject : ${subjects}" th:value="${subject.id}"
+                    th:text="${subject.name}">
+            </option>
+        </select>
+
+        <label th:for="Student">Student:</label>
+        <select class="form-control" th:field="*{student}">
+            <option th:each="student : ${students}" th:value="${student.id}"
+                    th:text="${student.getFullName()}">
+            </option>
+        </select>
+
+
+        <div class="alert alert-danger" th:if="${#fields.hasErrors('*')}">
+            <span th:each="err : ${#fields.errors('*')}" th:text="${err}"/>
+        </div>
+        <br>
+        <input type="submit" class="btn btn-outline-primary col-lg-12" value="Add mark"/>
+        <hr>
+
+        <div class="alert alert-success" th:if="${#strings.isEmpty(markAddResult) == false}"
+             th:text="${markAddResult}"/>
+    </form>
+</div>
+<th:block th:include="fragments/footer :: footer"></th:block>
+</body>
+</html>

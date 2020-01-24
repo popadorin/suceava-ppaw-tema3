@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
+<body>
+<div th:fragment="menu">
+<nav class="navbar navbar-expand-sm navbar-dark">
+  <ul>
+    <li class="nav-item">
+      <a th:href="@{/enterMarks}">Enter students marks</a>
+    </li>
+    <li class="nav-item">
+		<a th:href="@{/showMarks}">Show register</a>
+    </li>
+    <!--<li class="nav-item">-->
+		<!--<a th:href="@{/introducereOperatie}">Subjects marks</a>-->
+    <!--</li>-->
+     <!--<li class="nav-item">-->
+		<!--<a th:href="@{/afisareOperatii}">Show students marks</a>-->
+    <!--</li>-->
+  </ul>
+</nav>
+<br>
+</div>
+
+</body>
+</html>

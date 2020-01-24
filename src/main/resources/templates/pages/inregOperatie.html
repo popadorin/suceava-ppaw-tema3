@@ -1,0 +1,60 @@
+<html style="position: relative; min-height: 100%;">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+    
+</head>
+<body>
+
+<th:block th:include="fragments/menu :: menu"></th:block>
+<div class="w3-container" style="width: 550px;">
+  <h2>Introducerea unei operatii efectuate cu produsele din Magazie</h2>
+							<form method="post" th:object="${newMagazie}" th:action="@{/introducereOperatie}"> 
+								<div class="form-group">
+								
+									<label th:for="Operatie">Operatie:</label>
+									<select class="form-control" th:field="*{operatie}">
+										<option value="Achizitie">Achizitie</option>
+										<option value="Vanzare">Vanzare</option>
+									</select>
+									
+									<label th:for="produs">Produs:</label>
+									<select class="form-control" th:field="*{produs}">
+										<option th:each="p : ${Produse}" th:value="${p.id}" 
+										               th:text="${p.denumire}">
+										               
+									    </option>
+									</select>
+
+									<label th:for="cantitate">Cantitate: (nr. intreg)</label>
+									<input class="form-control" th:field="*{cantitate}" />
+									<div class="alert alert-danger" th:if="${#fields.hasErrors('*')}">
+									    <span th:each="err : ${#fields.errors('*')}" th:text="${err}" />
+									</div>
+
+									<label th:for="Firma">ID Firma:</label>
+									<select class="form-control" th:field="*{firma}">
+										<option th:each="f : ${Firme}" th:value="${f.id}" 
+										               th:text="|${f.nume} ${f.oras}|">
+										               
+									    </option>
+									</select>
+
+								</div>
+								
+								<input type="submit" class="btn btn-primary" aria-pressed="false" value="Inregistrare operatie" />
+								
+								
+								<hr>
+								
+								<div class="alert alert-success" th:if="${#strings.isEmpty(rez) == false}" th:utext="${rez}" />
+							</form>
+	</div>
+	<th:block th:include="fragments/footer :: footer"></th:block>	
+
+	</body>
+</html>

@@ -1,18 +1,16 @@
 package com.suceava.proiect.tema3.repository;
 
-import com.suceava.proiect.tema3.entity.TestEntity;
+import com.suceava.proiect.tema3.entity.Mark;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
-public interface TestRepository extends CrudRepository<TestEntity, Long> {
+public interface MarkRepository extends CrudRepository<Mark, Long> {
     @Override
-    List<TestEntity> findAll();
+    List<Mark> findAll();
 
     @Override
-    TestEntity save(TestEntity testEntity);
-
-
+    Mark save(Mark mark);
 }

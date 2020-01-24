@@ -14,4 +14,31 @@ public class Subject {
 
     @NotNull(message = "Name is mandatory")
     String name;
+
+    public Subject(String name) {
+        this.name = name;
+    }
+
+    public Subject() {
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    @Override
+    public String toString() {
+        return "Subject{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }

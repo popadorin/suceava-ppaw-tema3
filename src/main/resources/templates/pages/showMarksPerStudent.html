@@ -15,9 +15,9 @@
 
     <form method="post" th:action="@{/showMarksPerStudent}">
         <label>Please select student:</label>
-        <select class="form-control" name="s">
-            <option th:each="student : ${students}" th:value="${student.id}"
-                    th:text="${student.getFullName()}">
+        <select class="form-control" name="student">
+            <option th:each="s : ${students}" th:value="${s.id}"
+                    th:text="${s.getFullName()}">
             </option>
         </select>
 
@@ -29,7 +29,7 @@
 
         <thead>
         <tr class="table-primary">
-            Marks gained by <span th:text="marks.get(0).getStudent().getFullName()"></span>
+            Marks gained by <span th:text="${student.getFullName()}"></span>
         </tr>
         </thead>
         <tbody>

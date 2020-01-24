@@ -11,10 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -81,30 +78,27 @@ public class MarkController {
     public String showMarksPerSubject(Subject subject, Model model) {
         List<Subject> subjects = this.subjectService.findAll();
         model.addAttribute("subjects", subjects);
+        model.addAttribute("subject", new Subject("OOP"));
 
         return "pages/showMarksPerSubject";
     }
 
     @PostMapping("showMarksPerSubject")
-    public String selectSubject(@Valid @RequestParam("subject") Subject subject, Errors errors, Model model) {
-        if (errors.hasErrors()) {
-            return "pages/showMarksPerSubject";
-        }
-
-        Subject selectedSubject = new Subject("OOP");
+    public String selectSubject(Subject subject, Model model) {
         List<Mark> marks = this.markService.getMarks();
         List<Mark> selectedMarks = marks.stream()
-                .filter(m -> m.getSubject().equals(selectedSubject))
+                .filter(m -> m.getSubject().equals(subject))
                 .collect(Collectors.toList());
 
-        System.out.println(subject);
         model.addAttribute("marks", selectedMarks);
+        List<Subject> subjects = this.subjectService.findAll();
+        model.addAttribute("subjects", subjects);
 
         return "pages/showMarksPerSubject";
     }
 
     @GetMapping("showMarksPerStudent")
-    public String showMarksPerStudent(Student s, Model model) {
+    public String showMarksPerStudent(Student student, Model model) {
         List<Student> students = this.studentService.findAll();
         model.addAttribute("students", students);
 
@@ -112,16 +106,15 @@ public class MarkController {
     }
 
     @PostMapping("showMarksPerStudent")
-    public String selectStudent(Model model, @RequestParam("s") Student student) {
-
-        Student selectedStudent = new Student("grisha", "petrovici");
+    public String selectStudent(Student student, Model model) {
         List<Mark> marks = this.markService.getMarks();
         List<Mark> selectedMarks = marks.stream()
-                .filter(m -> m.getStudent().equals(selectedStudent))
+                .filter(m -> m.getStudent().equals(student))
                 .collect(Collectors.toList());
 
-        System.out.println(student);
         model.addAttribute("marks", selectedMarks);
+        List<Student> students = this.studentService.findAll();
+        model.addAttribute("students", students);
 
         return "pages/showMarksPerStudent";
     }

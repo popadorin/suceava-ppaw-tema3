@@ -15,9 +15,9 @@
 
     <form method="post" th:action="@{/showMarksPerSubject}">
         <label>Please select subject:</label>
-        <select class="form-control" th:value="${subject}">
-            <option th:each="subject_ : ${subjects}" th:value="${subject_.id}"
-                    th:text="${subject_.getName()}">
+        <select class="form-control" name="subject">
+            <option th:each="s: ${subjects}" th:value="${s.id}"
+                    th:text="${s.getName()}">
             </option>
         </select>
 
@@ -29,7 +29,7 @@
 
         <thead>
         <tr class="table-primary">
-            Marks at <span th:text="marks.get(0).getSubject().getName()"></span>
+            Marks at <span th:text="${subject.name}"></span>
         </tr>
         </thead>
         <tbody>

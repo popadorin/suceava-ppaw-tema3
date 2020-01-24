@@ -55,12 +55,16 @@ public class MarkController {
         int studentMark = mark.getValue();
         String markAddResult = String.format("Student %s has %s mark at %s", studentName, studentMark, subjectName);
         model.addAttribute("markAddResult", markAddResult);
+        List<Student> students = this.studentService.findAll();
+        List<Subject> subjects = this.subjectService.findAll();
+        model.addAttribute("subjects", subjects);
+        model.addAttribute("students", students);
 
         return "pages/enterMarks";
     }
 
     @GetMapping("showMarks")
-    public String showMarks(Mark mark, Model model) {
+    public String showMarks(Model model) {
         List<Subject> subjects = this.subjectService.findAll();
         List<Mark> marks = this.markService.getMarks();
         List<String> tableHeaders = MarkHelper.getTableHeaders(subjects);
@@ -75,10 +79,9 @@ public class MarkController {
     }
 
     @GetMapping("showMarksPerSubject")
-    public String showMarksPerSubject(Subject subject, Model model) {
+    public String showMarksPerSubject(Model model) {
         List<Subject> subjects = this.subjectService.findAll();
         model.addAttribute("subjects", subjects);
-        model.addAttribute("subject", new Subject("OOP"));
 
         return "pages/showMarksPerSubject";
     }
@@ -98,7 +101,7 @@ public class MarkController {
     }
 
     @GetMapping("showMarksPerStudent")
-    public String showMarksPerStudent(Student student, Model model) {
+    public String showMarksPerStudent(Model model) {
         List<Student> students = this.studentService.findAll();
         model.addAttribute("students", students);
 

@@ -6,21 +6,25 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
-
+    <style>
+        body {
+            margin: 30px;
+        }
+    </style>
 </head>
 <body>
 <th:block th:include="fragments/menu :: menu"></th:block>
 <div class="w3-container">
     <h2>Show marks per student</h2>
 
-    <form method="post" th:action="@{/showMarksPerStudent}">
+    <form  style="width: 550px;" method="post" th:action="@{/showMarksPerStudent}">
         <label>Please select student:</label>
         <select class="form-control" name="student">
             <option th:each="s : ${students}" th:value="${s.id}"
                     th:text="${s.getFullName()}">
             </option>
         </select>
-
+        <br>
         <input type="submit" class="btn btn-outline-primary col-lg-12" value="Show marks"/>
     </form>
 
@@ -29,7 +33,9 @@
 
         <thead>
         <tr class="table-primary">
-            Marks gained by <span th:text="${student.getFullName()}"></span>
+            <p style="font-weight: 500;">
+                Marks gained by <span style="color: red" th:text="${student.getFullName()}"></span>
+            </p>
         </tr>
         </thead>
         <tbody>
